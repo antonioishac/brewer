@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "estilo")
@@ -19,9 +22,11 @@ public class Estilo implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo_estilo")
+	@Column(name = "codigo")
 	private Long codigo;
 
+	@NotBlank(message = "Campo nome não pode ser vazio")
+	@Size(min = 3, max = 20, message = "O campo nome deve ter no mínimo {min} e no máximo {max}")
 	private String nome;
 
 	@OneToMany(mappedBy = "estilo")
